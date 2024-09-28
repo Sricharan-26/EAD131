@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .calculator {
+            width: 280px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .display {
+            width: 100%;
+            height: 50px;
+            background-color: #222;
+            color: white;
+            text-align: right;
+            font-size: 24px;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .button {
+            width: 100%;
+            padding: 20px;
+            font-size: 18px;
+            background-color: #f1f1f1;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 2px -2px gray;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #ddd;
+        }
+
+        .button.operator {
+            background-color: #ff9500;
+            color: white;
+        }
+
+        .button.operator:hover {
+            background-color: #e08900;
+        }
+
+        .button.equal {
+            background-color: #28a745;
+            color: white;
+            grid-column: span 2;
+        }
+
+        .button.clear {
+            background-color: #dc3545;
+            color: white;
+            grid-column: span 2;
+        }
+
+        .button.zero {
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+        <button class="button clear" onclick="clearDisplay()">C</button>
+        <button class="button" onclick="deleteDigit()">DEL</button>
+        <button class="button operator" onclick="inputOperator('/')">÷</button>
+        
+        <button class="button" onclick="inputDigit('7')">7</button>
+        <button class="button" onclick="inputDigit('8')">8</button>
+        <button class="button" onclick="inputDigit('9')">9</button>
+        <button class="button operator" onclick="inputOperator('*')">×</button>
+
+        <button class="button" onclick="inputDigit('4')">4</button>
+        <button class="button" onclick="inputDigit('5')">5</button>
+        <button class="button" onclick="inputDigit('6')">6</button>
+        <button class="button operator" onclick="inputOperator('-')">−</button>
+
+        <button class="button" onclick="inputDigit('1')">1</button>
+        <button class="button" onclick="inputDigit('2')">2</button>
+        <button class="button" onclick="inputDigit('3')">3</button>
+        <button class="button operator" onclick="inputOperator('+')">+</button>
+
+        <button class="button zero" onclick="inputDigit('0')">0</button>
+        <button class="button" onclick="inputDecimal()">.</button>
+        <button class="button equal" onclick="calculateResult()">=</button>
+    </div>
+</div>
+
+<script>
+    let displayValue = '0';
+    let firstOperand = null;
+    let secondOperand = null;
+    let operator = null;
+    let waitingForSecondOperand = false;
+
+    function updateDisplay() {
+        const display = document.getElementById('display');
+        display.innerText = displayValue;
+    }
+
+    function inputDigit(digit) {
+        if (waitingForSecondOperand) {
+            displayValue = digit;
+            waitingForSecondOperand = false;
+        } else {
+            displayValue = displayValue === '0' ? digit : displayValue + digit;
+        }
+        updateDisplay();
+    }
+
+    function inputDecimal() {
+        if (!displayValue.includes('.')) {
+            displayValue += '.';
+        }
+        updateDisplay();
+    }
+
+    function clearDisplay() {
+        displayValue = '0';
+        firstOperand = null;
+        secondOperand = null;
+        operator = null;
+        waitingForSecondOperand = false;
+        updateDisplay();
+    }
+
+    function deleteDigit() {
+        if (displayValue.length > 1) {
+            displayValue = displayValue.slice(0, -1);
+        } else {
+            displayValue = '0';
+        }
+        updateDisplay();
+    }
+
+    function inputOperator(nextOperator) {
+        if (firstOperand === null) {
+            firstOperand = parseFloat(displayValue);
+        } else if (operator) {
+            const result = performCalculation(firstOperand, parseFloat(displayValue), operator);
+            displayValue = `${parseFloat(result.toFixed(7))}`;
+            firstOperand = result;
+        }
+
+        operator = nextOperator;
+        waitingForSecondOperand = true;
+        updateDisplay();
+    }
+
+    function performCalculation(first, second, operator) {
+        switch (operator) {
+            case '+':
+                return first + second;
+            case '-':
+                return first - second;
+            case '*':
+                return first * second;
+            case '/':
+                return first / second;
+            default:
+                return second;
+        }
+    }
+
+    function calculateResult() {
+        if (firstOperand !== null && operator !== null && !waitingForSecondOperand) {
+            secondOperand = parseFloat(displayValue);
+            displayValue = `${performCalculation(firstOperand, secondOperand, operator)}`;
+            firstOperand = null;
+            operator = null;
+        }
+        updateDisplay();
+    }
+
+    updateDisplay();
+</script>
+
+</body>
+</html>
