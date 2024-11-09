@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="/port.css">
+    <title>Portfolio Website</title>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">Student</a>
+    </header>
+    <section class="home">
+        <div class="home-img">
+            <img src="/port.jpg" alt="">
+        </div>
+        <div class="home-content">
+            <h1>Hi, It's <span>Rakesh</span></h1>
+            <h3 class="typing-text">I'm a <span></span></h3>
+            <p>Hello! I'm Rakesh atla, a passionate software developer with a strong focus on front-end development, user experience design. I have a deep love for technology and problem-solving, which drives me to continuously learn and grow in my field.
+
+                I specialize in creating dynamic and responsive web applications. My goal is to build innovative solutions that not only meet user needs but also provide engaging and memorable experiences.</p>
+            <div class="social-icons">
+                <a href="https://www.linkedin.com/in/rakesh-atla-7353ba28a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com/Rakeshatla/"><i class="fa-brands fa-github"></i></a>
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <!-- Navigation -->
+<nav>
+    <ul>
+        <li><a href="#" onclick="showSection('skills')">Skills</a></li>
+        <li><a href="#" onclick="showSection('education')">Education</a></li>
+        <!-- Add more navigation items as needed -->
+    </ul>
+</nav>
+
+<!-- Sections -->
+<section id="skills" style="display: none;">
+    <h2>Skills</h2>
+    <ul class="skills-list">
+        <li>HTML & CSS</li>
+        <li>JavaScript</li>
+        <li>Python</li>
+        <li>React.js</li>
+        <li>Node.js</li>
+        <li>MongoDB</li>
+    </ul>
+</section>
+
+<section id="education" style="display: none;">
+    <h2>Education</h2>
+    <div class="education-item">
+        <h3>Bachelor of Technology in Information Technology</h3>
+        <p>Chaitanya bharathi institute of Technology, 2022 - 2026</p>
+    </div>
+    <div class="education-item">
+        <h3>Senior secondary</h3>
+        <p>Narayana Junior College, 2020 - 2022</p>
+    </div>
+    <div class="education-item">
+        <h3>secondary</h3>
+        <p>Narayana High School, 2020</p>
+    </div>
+</section>
+
+            <a href="#" class="btn">Hire me</a>
+        </div>
+    </section>
+</body>
+<script>
+    function showSection(sectionId) {
+        // Hide all sections
+        var sections = document.querySelectorAll("section");
+        sections.forEach(function(section) {
+            section.classList.remove("show");
+        });
+    
+        // Show the clicked section
+        var selectedSection = document.getElementById(sectionId);
+        selectedSection.classList.add("show");
+    }
+    </script>
+</html>
+
