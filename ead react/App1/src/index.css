@@ -1,0 +1,55 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  text-align: center;
+}
+
+input {
+  padding: 10px;
+  margin: 20px 0;
+  width: 300px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.strength-bar {
+  height: 10px;
+  width: 300px;
+  background-color: #ddd;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.strength-bar[data-strength="1"] {
+  background-color: red;
+  width: 25%;
+}
+
+.strength-bar[data-strength="2"] {
+  background-color: orange;
+  width: 50%;
+}
+
+.strength-bar[data-strength="3"] {
+  background-color: yellow;
+  width: 75%;
+}
+
+.strength-bar[data-strength="4"] {
+  background-color: green;
+  width: 100%;
+}
+
+p {
+  font-size: 16px;
+  font-weight: bold;
+}
